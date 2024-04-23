@@ -8,6 +8,7 @@ using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.ReplyMarkups;
 
+
 public class TelegramBot
 {
     // Токен TG-бота. Можно получить у @BotFather
@@ -107,7 +108,7 @@ public class TelegramBot
         // Печатаем на консоль факт получения сообщения
         Console.WriteLine($"Получено сообщение в чате {chatId}: '{messageText}'");
 
-        // TODO: Обработка пришедших сообщений
+        
         if (!logbase.ContainsKey(chatId))
         {
             logbase.Add(chatId, new List<string>());
@@ -118,19 +119,48 @@ public class TelegramBot
             logbase[chatId].Add(message.Text);
         }
 
-        switch (messageText)
-        {
-            case "/start": // Стартовое сообщение и ознакомление с функционалом бота
-                WriteToLog($"User: {chatId}  Message: {messageText}");
-                ReplyKeyboardMarkup replyKeyboardMarkup = new(new[]
-            {
+        // Клавиатура главного меню
+        ReplyKeyboardMarkup replyKeyboardMarkup = new(new[]
+           {
                 new KeyboardButton[] { "Общие сведения" },
                 new KeyboardButton[] { "Справочник по языку" },
                 new KeyboardButton[] { "Стандартные модули" },
              })
-                {
-                    ResizeKeyboard = true
-                };
+        {
+            ResizeKeyboard = true
+        };
+
+        // Клавиатура меню общие сведения
+        ReplyKeyboardMarkup replyKeyboardMarkup1 = new(new[]
+           {
+                new KeyboardButton[] { "О системе PascalABC.NET  " },
+                new KeyboardButton[] { "Отличия языка PascalABC.NET от Delphi" },
+                new KeyboardButton[] { "Коротко о главном" },
+             })
+        {
+            ResizeKeyboard = true
+        };
+        // Клавиатура справочник по языку
+        ReplyKeyboardMarkup replyKeyboardMarkup2 = new(new[]
+           {
+                new KeyboardButton[] { "Основы" },
+                new KeyboardButton[] { "Типы данных" },
+                new KeyboardButton[] { "Операторы" },
+                new KeyboardButton[] { "Структурное программирование" },
+                new KeyboardButton[] { "Объектно-ориентированное программирование" },
+                new KeyboardButton[] {"Функциональное программирование"},
+             })
+        {
+            ResizeKeyboard = true
+        };
+
+
+        // TODO: Обработка пришедших сообщений
+        switch (messageText)
+        {
+            case "/start": // Стартовое сообщение и ознакомление с функционалом бота
+                WriteToLog($"User: {chatId}  Message: {messageText}");
+               
 
                 Message sentMessage = await botClient.SendTextMessageAsync(
                 chatId: chatId,
@@ -141,18 +171,22 @@ public class TelegramBot
 
                 break;
 
+            case "/help": // Стартовое сообщение и ознакомление с функционалом бота
+                WriteToLog($"User: {chatId}  Message: {messageText}");
+
+
+                _ = await botClient.SendTextMessageAsync(
+                chatId: chatId,
+                text: "Выберите в меню, чем я могу быть вам полезен.",
+                replyMarkup: replyKeyboardMarkup,
+                cancellationToken: cancellationToken);
+                WriteToLog($"User: Bot  Message: \"Выберите в меню, чем я могу быть вам полезен.\" ");
+
+                break;
             case "Общие сведения":
 
                 WriteToLog($"User: {chatId}  Message: {messageText}");
-                ReplyKeyboardMarkup replyKeyboardMarkup1 = new(new[]
-           {
-                new KeyboardButton[] { "О системе PascalABC.NET  " },
-                new KeyboardButton[] { "Отличия языка PascalABC.NET от Delphi" },
-                new KeyboardButton[] { "Коротко о главном" },
-             })
-                {
-                    ResizeKeyboard = true
-                };
+                
 
                 _ = await botClient.SendTextMessageAsync(
                 chatId: chatId,
@@ -163,6 +197,21 @@ public class TelegramBot
 
                 break;
 
+            case "Справочник по языку":
+
+
+                WriteToLog($"User: {chatId}  Message: {messageText}");
+
+
+                _ = await botClient.SendTextMessageAsync(
+                chatId: chatId,
+                text: "Выберите интересующий вас пункт в меню",
+                replyMarkup: replyKeyboardMarkup2,
+                cancellationToken: cancellationToken);
+                WriteToLog($"User: Bot  Message: \"Выберите интересующий вас пункт в меню\" ");
+
+
+                break;
                 
 
 
@@ -174,11 +223,18 @@ public class TelegramBot
                 WriteToLog($"User: {chatId}  Message: {messageText}"); // logging
                 _ = await botClient.SendTextMessageAsync(
                 chatId: chatId,
-                text: "Вы написали: \"" + messageText+"\" Но я не знаю такой команды! Попробуйте спросить меня о чем-то связанном с PascalABC.NET!",
+                text: "Вы написали: \"" + messageText+ "\" Но я не знаю такой команды! Попробуйте спросить меня о чем-то связанном с PascalABC.NET!  Используйте /help , чтобы узнать что я умею!",
                 cancellationToken: cancellationToken);
-                WriteToLog($"User: Bot  Message: {"Вы написали: \"" + messageText + "\" Но я не знаю такой команды! Попробуйте спросить меня о чем-то связанном с PascalABC.NET!"} ");
+                WriteToLog($"User: Bot  Message: {"Вы написали: \"" + messageText + "\" Но я не знаю такой команды! Попробуйте спросить меня о чем-то связанном с PascalABC.NET! Используйте /help , чтобы узнать что я умею!"} ");
+
                 
-                
+
+                Message message1 = await botClient.SendStickerAsync(
+                chatId: chatId,
+                sticker: new Telegram.Bot.Types.InputFileUrl("https://raw.githubusercontent.com/MMCS-FIIT/cs211a-bonus2-olekasndrsvl/main/SimpleTGBot/Resources/sad_sticker.webp"),
+                replyMarkup: replyKeyboardMarkup,
+                cancellationToken: cancellationToken);
+           
 
                 break;
 
