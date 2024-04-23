@@ -186,7 +186,11 @@ public class TelegramBot
             case "Общие сведения":
 
                 WriteToLog($"User: {chatId}  Message: {messageText}");
-                
+                Message message1 = await botClient.SendStickerAsync(
+               chatId: chatId,
+               sticker: new Telegram.Bot.Types.InputFileUrl("https://raw.githubusercontent.com/MMCS-FIIT/cs211a-bonus2-olekasndrsvl/main/SimpleTGBot/Resources/sticker_glad.webp"),
+               replyMarkup: replyKeyboardMarkup1,
+               cancellationToken: cancellationToken);
 
                 _ = await botClient.SendTextMessageAsync(
                 chatId: chatId,
@@ -194,6 +198,7 @@ public class TelegramBot
                 replyMarkup: replyKeyboardMarkup1,
                 cancellationToken: cancellationToken);
                 WriteToLog($"User: Bot  Message: \"Выберите интересующий вас пункт в меню\" ");
+               
 
                 break;
 
@@ -201,7 +206,11 @@ public class TelegramBot
 
 
                 WriteToLog($"User: {chatId}  Message: {messageText}");
-
+                _ = await botClient.SendStickerAsync(
+               chatId: chatId,
+               sticker: new Telegram.Bot.Types.InputFileUrl("https://raw.githubusercontent.com/MMCS-FIIT/cs211a-bonus2-olekasndrsvl/main/SimpleTGBot/Resources/sticker_glad.webp"),
+               replyMarkup: replyKeyboardMarkup2,
+               cancellationToken: cancellationToken);
 
                 _ = await botClient.SendTextMessageAsync(
                 chatId: chatId,
@@ -209,6 +218,9 @@ public class TelegramBot
                 replyMarkup: replyKeyboardMarkup2,
                 cancellationToken: cancellationToken);
                 WriteToLog($"User: Bot  Message: \"Выберите интересующий вас пункт в меню\" ");
+
+
+               
 
 
                 break;
@@ -229,7 +241,7 @@ public class TelegramBot
 
                 
 
-                Message message1 = await botClient.SendStickerAsync(
+                Message message3 = await botClient.SendStickerAsync(
                 chatId: chatId,
                 sticker: new Telegram.Bot.Types.InputFileUrl("https://raw.githubusercontent.com/MMCS-FIIT/cs211a-bonus2-olekasndrsvl/main/SimpleTGBot/Resources/sad_sticker.webp"),
                 replyMarkup: replyKeyboardMarkup,
