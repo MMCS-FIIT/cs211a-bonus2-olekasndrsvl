@@ -266,6 +266,83 @@ public class TelegramBot
 
 
                 break;
+
+
+            case "Основы":
+                _ = await botClient.SendTextMessageAsync(
+              chatId: chatId,
+              text: "<b>Внешний вид программы</b> \n Программа содержит ключевые слова, идентификаторы, комментарии. Ключевые слова используются для выделения синтаксических конструкций и подсвечиваются жирным шрифтом в редакторе. Идентификаторы являются именами объектов программы и не могут совпадать с ключевыми словами.\r\n\r\n Программа на языке PascalABC.NET имеет следующий вид:\r\n\r\nprogram имя программы;\r\nраздел uses\r\nраздел описаний\r\nbegin\r\n  операторы\r\nend.\r\n\r\nПервая строка называется заголовком программы и не является обязательной.\r\n\r\nРаздел uses состоит из нескольких подряд идущих секций uses, каждая из которых начинается с ключевого слова uses, за которым следует список имен модулей и пространств имен .NET, перечисляемых через запятую.\r\n\r\nРаздел описаний может включать следующие подразделы:\r\n\r\nраздел описания переменных\r\nраздел описания констант\r\nраздел описания типов\r\nраздел описания меток\r\nраздел описания процедур и функций\r\nДанные подразделы следуют друг за другом в произвольном порядке.\n <b>Выражения и операции: обзор</b>\r\nВыражение - это конструкция, возвращающая значение некоторого типа. Простыми выражениями являются переменные и константы. Более сложные выражения строятся из простых с помощью операций, вызовов функций и скобок. Данные, к которым применяются операции, называются операндами. \r\n<b>В PascalABC.NET имеются следующие операции: @, not, ^, *, /, div, mod, and, shl, shr, +, -, or, xor, =, &gt,   &lt; , &lt;&gt; ,  &lt;=, &gt=, as, is, in, а также операция new и операция приведения типа. Операции @, -, +, ^, not, операция приведения типа и операция new являются унарными (имеют один операнд), остальные являются бинарными (имеют два операнда), операции + и - являются и бинарными и унарными.</b>\r\n\r\n",
+              replyMarkup: replyKeyboardMarkup2,
+              parseMode: ParseMode.Html,
+              cancellationToken: cancellationToken);
+                WriteToLog($"User: Bot  Message: Содержание \"Основы PascalABC.NET\" ");
+                _ = await botClient.SendTextMessageAsync(
+                chatId: chatId,
+                text: "Ознакомиться более подробно со справкой по языку PascalABC.NET Вы всегда можете по ссылке:\n https://pascalabc.net/downloads/pabcnethelp/index.htm ",
+                replyMarkup: replyKeyboardMarkup2,
+                parseMode: ParseMode.Html,
+                cancellationToken: cancellationToken);
+                WriteToLog($"User: Bot  Message: Reminding message  ");
+
+                break;
+
+            case "Типы данных":
+                _ = await botClient.SendTextMessageAsync(
+              chatId: chatId,
+              text: "<b>Обзор типов</b>\r\nТипы в PascalABC.NET подразделяются на простые, структурированные, типы указателей, процедурные типы и последовательности.\r\n\r\nК простым относятся целые и вещественные типы, логический, символьный, перечислимый и диапазонный тип.\r\n\r\nТип данных называется структурированным, если в одной переменной этого типа может содержаться множество значений.\r\n\r\nК структурированным типам относятся массивы, строки, записи, кортежи, множества, файлы и классы.\r\n\r\nОсобым типом данных является последовательность, которая хранит по-существу алгоритм получения данных последовательности один за другим.\r\n\r\nВсе простые типы, кроме вещественного, называются порядковыми. Только значения этих типов могут быть индексами статических массивов и параметрами цикла for. Кроме того, для порядковых типов используются функции Ord, Pred и Succ, а также процедуры Inc и Dec.\r\n\r\nВсе типы, кроме типов указателей, являются производными от типа Object. Каждый тип в PascalABC.NET имеет отображение на тип .NET. Тип указателя принадлежит к неуправляемому коду и моделируется типом void*.\r\n\r\nБольшинство типов в PascalABC.NET подразделяются на размерные, ссылочные и типы указателей. Сравнение размерных и ссылочных типов дано здесь.\r\n\r\nКроме того, в PascalABC.NET имеется несколько типов, унаследованных от Delphi Object Pascal, которые трудно отнести к размерному или ссылочному типу. Это статические массивы, множества, размерные строки и файлы. По представлению в памяти они относятся к ссылочному типу, но по поведению - к размерному.\r\n",
+              replyMarkup: replyKeyboardMarkup2,
+              parseMode: ParseMode.Html,
+              cancellationToken: cancellationToken);
+                WriteToLog($"User: Bot  Message: Содержание \"Основы PascalABC.NET\" ");
+                _ = await botClient.SendTextMessageAsync(
+                chatId: chatId,
+                text: "Ознакомиться с каждым типом языка PascalABC.NET в отдельности Вы всегда можете по ссылке в разделе <b>Типы Данных</b>:\n https://pascalabc.net/downloads/pabcnethelp/index.htm ",
+                replyMarkup: replyKeyboardMarkup2,
+                parseMode: ParseMode.Html,
+                cancellationToken: cancellationToken);
+                WriteToLog($"User: Bot  Message: Reminding message  ");
+
+                break;
+
+            case "Операторы":
+                _ = await botClient.SendTextMessageAsync(
+              chatId: chatId,
+              text: "<b>Операторы: обзор</b>\r\nВ PascalABC.NET определены следующие операторы.\r\n\r\nОператоры присваивания\r\nСоставной оператор\r\nОператор описания переменной\r\nОператор цикла for\r\nОператор цикла foreach\r\nОператоры цикла while и repeat\r\nУсловный оператор if\r\nОператор выбора варианта case\r\nОператор вызова процедуры\r\nОператор try except\r\nОператор try finally\r\nОператор raise\r\nОператоры break, continue и exit\r\nОператор goto\r\nОператор lock \r\nОператор with\r\nПустой оператор",
+              replyMarkup: replyKeyboardMarkup2,
+              parseMode: ParseMode.Html,
+              cancellationToken: cancellationToken);
+                WriteToLog($"User: Bot  Message: Содержание \"Основы PascalABC.NET\" ");
+                _ = await botClient.SendTextMessageAsync(
+                chatId: chatId,
+                text: "Ознакомиться с каждым оператором языка PascalABC.NET в отдельности Вы всегда можете по ссылке в разделе <b>Операторы</b>:\n https://pascalabc.net/downloads/pabcnethelp/index.htm ",
+                replyMarkup: replyKeyboardMarkup2,
+                parseMode: ParseMode.Html,
+                cancellationToken: cancellationToken);
+                WriteToLog($"User: Bot  Message: Reminding message  ");
+
+                break;
+
+
+
+            case "Стандартные модули":
+                _ = await botClient.SendTextMessageAsync(
+            chatId: chatId,
+            text: "<b>Стандартные модули</b>\r\nПоскольку в PascalABC.NET можно пользоваться всеми библиотеками платформы .NET, стандартные модули немногочисленны и ориентированы на обучение:\r\n\r\nМодуль растровой графики GraphWPF\r\nМодуль растровой графики GraphABC (для Linux)\r\nМодуль 3D графики и анимации Graph3D (на основе свободной библиотеки Helix Toolkit)\r\nМодуль векторной графики WPFObjects\r\nМодуль векторной графики ABCObjects (устаревший)\r\nМодуль FormsABC для создания графических интерфейсов (на базе технологии Windows Forms)\r\nМодуль NumLibABC (библиотека численных методов)\r\nМодуль PlotWPF для визуализации данных\r\nМодули исполнителей Робот и Чертёжник (школьная информатика)\r\nМодуль электронного задачника Programming Taskbook (базовая версия)",
+            replyMarkup: replyKeyboardMarkup,
+            parseMode: ParseMode.Html,
+            cancellationToken: cancellationToken);
+                WriteToLog($"User: Bot  Message: Содержание \"Основы PascalABC.NET\" ");
+                _ = await botClient.SendTextMessageAsync(
+                chatId: chatId,
+                text: "Ознакомиться более подробно с каждым модулем Вы всегда можете по ссылке:\n https://pascalabc.net/downloads/pabcnethelp/index.htm ",
+                replyMarkup: replyKeyboardMarkup,
+                parseMode: ParseMode.Html,
+                cancellationToken: cancellationToken);
+                WriteToLog($"User: Bot  Message: Reminding message  ");
+                break;
+
+
+
             default:
 
                 // Отправляем обратно то же сообщение, что и получили
